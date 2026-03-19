@@ -1,0 +1,171 @@
+import { useState } from "react";
+import { useScrollFadeIn } from "@/hooks/useScrollFadeIn";
+import Layout from "@/components/Layout";
+
+const productTypes = [
+  "Serving Tray",
+  "Cheese Board",
+  "River Table",
+  "Coaster Set",
+  "Name Plaque",
+  "Custom Piece",
+];
+
+export default function Contact() {
+  const containerRef = useScrollFadeIn();
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <Layout>
+      <div ref={containerRef}>
+        <section className="pt-32 pb-16 px-6 max-w-3xl mx-auto">
+          <h1 className="font-heading text-4xl md:text-5xl text-center font-light tracking-wide mb-4">
+            Commission Your Piece
+          </h1>
+          <p className="text-center text-muted-foreground mb-16 max-w-md mx-auto">
+            Tell us your vision — we'll bring it to life.
+          </p>
+
+          {submitted ? (
+            <div className="fade-in-section text-center py-20">
+              <span className="text-4xl mb-4 block">✦</span>
+              <h2 className="font-heading text-2xl mb-2">Thank you!</h2>
+              <p className="text-muted-foreground">
+                We'll get back to you within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="fade-in-section space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    Name
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    Email
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    WhatsApp Number
+                  </label>
+                  <input
+                    type="tel"
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors"
+                    placeholder="+91 XXXXX XXXXX"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    Product Type
+                  </label>
+                  <select className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors">
+                    <option value="">Select a type</option>
+                    {productTypes.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    Preferred Size
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors"
+                    placeholder='e.g. 12" × 8"'
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                    Color Palette / Theme
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors"
+                    placeholder="Black & silver, ocean blue, etc."
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                  Additional Message
+                </label>
+                <textarea
+                  rows={4}
+                  className="w-full bg-transparent border-b border-border py-3 text-foreground focus:border-primary outline-none transition-colors resize-none"
+                  placeholder="Any special requests or details..."
+                />
+              </div>
+
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-12 py-4 bg-primary text-primary-foreground text-sm tracking-[0.2em] uppercase hover:bg-primary/90 transition-colors duration-300"
+                >
+                  Send Enquiry
+                </button>
+              </div>
+            </form>
+          )}
+        </section>
+
+        {/* Contact info */}
+        <section className="bg-dark-surface py-16 mt-16">
+          <div className="max-w-3xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <p className="text-xs tracking-[0.2em] uppercase text-cream/40 mb-2">WhatsApp</p>
+              <p className="text-cream/80">+91 XXXXX XXXXX</p>
+            </div>
+            <div>
+              <p className="text-xs tracking-[0.2em] uppercase text-cream/40 mb-2">Instagram</p>
+              <a
+                href="https://instagram.com/etch.luxury"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cream/80 hover:text-primary transition-colors"
+              >
+                @etch.luxury
+              </a>
+            </div>
+            <div>
+              <p className="text-xs tracking-[0.2em] uppercase text-cream/40 mb-2">Email</p>
+              <p className="text-cream/80">hello@etch.luxury</p>
+            </div>
+          </div>
+          <p className="text-center text-cream/30 text-xs tracking-widest uppercase mt-10">
+            We respond within 24 hours · Delivery across India
+          </p>
+        </section>
+      </div>
+    </Layout>
+  );
+}

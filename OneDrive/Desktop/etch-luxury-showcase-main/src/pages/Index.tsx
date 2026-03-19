@@ -1,0 +1,163 @@
+import { Link } from "react-router-dom";
+import { useScrollFadeIn } from "@/hooks/useScrollFadeIn";
+import Layout from "@/components/Layout";
+import heroImg from "@/assets/hero-tray.jpg";
+import editorialImg from "@/assets/editorial-banner.jpg";
+import productBlackSilver from "@/assets/product-black-silver.jpg";
+import productOceanBlue from "@/assets/product-ocean-blue.jpg";
+import productMonochrome from "@/assets/product-monochrome.jpg";
+import productCoasters from "@/assets/product-coasters.jpg";
+
+const craftFeatures = [
+  {
+    icon: "🪵",
+    title: "Live-Edge Wood",
+    desc: "Each slab is hand-selected for its natural character, grain, and raw beauty.",
+  },
+  {
+    icon: "💎",
+    title: "Food-Safe Resin",
+    desc: "Premium epoxy infused with pigments and metallics, sealed for everyday use.",
+  },
+  {
+    icon: "✦",
+    title: "One-of-a-Kind",
+    desc: "No molds, no repeats. Every pour creates a piece that can never be replicated.",
+  },
+];
+
+const signaturePieces = [
+  { name: "Midnight Silver Tray", price: "₹4,500", image: productBlackSilver },
+  { name: "Ocean Drift Tray", price: "₹5,200", image: productOceanBlue },
+  { name: "Monochrome Board", price: "₹3,800", image: productMonochrome },
+  { name: "Noir Coaster Set", price: "₹1,800", image: productCoasters },
+];
+
+export default function Index() {
+  const containerRef = useScrollFadeIn();
+
+  return (
+    <Layout>
+      <div ref={containerRef}>
+        {/* Hero */}
+        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src={heroImg}
+              alt="Black and silver resin wood tray on white linen"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-foreground/30" />
+          </div>
+          <div className="relative z-10 text-center px-6 max-w-3xl">
+            <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-cream tracking-wide leading-tight animate-fade-up">
+              Carved in Wood.
+              <br />
+              Poured in Resin.
+            </h1>
+            <p className="mt-6 text-cream/80 text-sm md:text-base tracking-widest uppercase font-body animate-fade-up [animation-delay:200ms]">
+              Luxury handcrafted pieces, made to order.
+            </p>
+            <Link
+              to="/collection"
+              className="inline-block mt-10 px-8 py-3 border border-cream/60 text-cream text-sm tracking-[0.2em] uppercase hover:bg-cream hover:text-foreground transition-all duration-500 animate-fade-up [animation-delay:400ms]"
+            >
+              Explore Collection
+            </Link>
+          </div>
+        </section>
+
+        {/* Gold divider */}
+        <div className="py-8 flex justify-center">
+          <div className="gold-divider" />
+        </div>
+
+        {/* The Craft */}
+        <section className="fade-in-section max-w-6xl mx-auto px-6 py-16 md:py-24">
+          <h2 className="font-heading text-3xl md:text-4xl text-center font-light mb-4 tracking-wide">
+            The Craft
+          </h2>
+          <p className="text-center text-muted-foreground text-sm tracking-widest uppercase mb-16">
+            What makes each piece extraordinary
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+            {craftFeatures.map((f) => (
+              <div key={f.title} className="text-center">
+                <span className="text-3xl block mb-4">{f.icon}</span>
+                <h3 className="font-heading text-xl md:text-2xl mb-3 tracking-wide">
+                  {f.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Editorial banner */}
+        <section className="fade-in-section relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+          <img
+            src={editorialImg}
+            alt="Dark resin close-up with silver swirls"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-foreground/50" />
+          <p className="relative z-10 font-heading text-2xl md:text-4xl lg:text-5xl italic text-cream text-center px-6 max-w-3xl font-light leading-relaxed">
+            "No two pieces are ever the same."
+          </p>
+        </section>
+
+        {/* Signature Pieces */}
+        <section className="fade-in-section py-16 md:py-24">
+          <h2 className="font-heading text-3xl md:text-4xl text-center font-light mb-4 tracking-wide">
+            Signature Pieces
+          </h2>
+          <p className="text-center text-muted-foreground text-sm tracking-widest uppercase mb-12">
+            Our most coveted creations
+          </p>
+          <div className="flex gap-6 overflow-x-auto px-6 pb-6 snap-x snap-mandatory scrollbar-hide">
+            {signaturePieces.map((p) => (
+              <div
+                key={p.name}
+                className="group snap-start flex-shrink-0 w-72 md:w-80"
+              >
+                <div className="relative overflow-hidden aspect-square bg-secondary">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500 flex items-center justify-center">
+                    <Link
+                      to={`/product/${p.name.replace(/\s+/g, '-').toLowerCase()}`}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 px-6 py-2 border border-cream text-cream text-xs tracking-[0.2em] uppercase hover:bg-cream hover:text-foreground"
+                    >
+                      Enquire Now
+                    </Link>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h3 className="font-heading text-lg tracking-wide">{p.name}</h3>
+                  <p className="text-muted-foreground text-sm mt-1">{p.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Closing statement */}
+        <section className="fade-in-section py-20 md:py-32 px-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="gold-divider mb-10" />
+            <p className="font-heading text-2xl md:text-3xl italic font-light leading-relaxed text-foreground/80">
+              Each piece begins as raw wood and liquid resin — and ends as a
+              story etched in time.
+            </p>
+            <div className="gold-divider mt-10" />
+          </div>
+        </section>
+      </div>
+    </Layout>
+  );
+}
